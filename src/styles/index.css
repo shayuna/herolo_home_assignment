@@ -20,6 +20,9 @@ body,html{
 .Hdr>.btn{
     cursor:pointer;
 }
+.Hdr>.btn.on{
+    font-weight:bold;
+}
 /* general - end */
 
 /* Main page - start*/
@@ -90,7 +93,9 @@ body,html{
         line-height:1.5rem;
       
       }
-      
+    .ui-helper-hidden-accessible{
+        display:none;
+    }  
     #eOutputWrapper{
         flex-grow:1;
     }
@@ -99,22 +104,44 @@ body,html{
         text-align:center;
         padding:1rem;
     }
-    #eFutureForecastWrapper{
+
+/* Main and Fav page layout - start*/
+    #eFutureForecastWrapper,#eFavCitiesWrapper{
         display:flex;
         justify-content: center;
     }
-    #eFutureForecastWrapper .itm{
-        padding:5rem 3rem;
+    #eFutureForecastWrapper .itm,#eFavCitiesWrapper .itm{
+        padding:3rem;
         margin:1rem;
         display:inline-block;
         border:1px solid black;
     }
     #eFutureForecastWrapper .itm>.caption,
-    #eFutureForecastWrapper .itm>.content{
+    #eFutureForecastWrapper .itm>.content,
+    #eFavCitiesWrapper .itm>.caption,
+    #eFavCitiesWrapper .itm>.content{
         padding:1rem 0;
         text-align: center;
     }
-    #eFutureForecastWrapper .itm>.caption{
+    #eFutureForecastWrapper .itm>.caption,#eFavCitiesWrapper .itm>.caption{
         font-weight:bold;
     }
-/* Main page - end*/
+/* Main and Fav page layout - end*/
+
+/*  smartphone resolution*/
+@media only screen and (max-width:767px){
+    #eFutureForecastWrapper,#eFavCitiesWrapper{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+    #eSearchBox{
+        width:auto;
+    }
+    #eMainPg .main>#eSearchBoxWrapper{
+        display:grid;
+        grid-template-columns:1rem auto 1rem 1fr 1rem;
+        grid-template-areas:". favBtn . searchBox .";
+        align-items:center;
+    }
+}

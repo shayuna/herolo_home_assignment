@@ -8,8 +8,8 @@ class Header extends React.Component{
         return(
             <div className="Hdr">
                 <h1 className="caption">weather for a sweater</h1>
-                <span className="btn" onClick={()=>{this.props.setPage(MAIN_PG)}}>Main</span>
-                <span className="btn" onClick={()=>{this.props.setPage(FAVORITES_PG)}}>Favorites</span>
+                <span className={this.props.selectedPg===MAIN_PG ? "on btn" : "btn"} onClick={()=>{this.props.setPage(MAIN_PG)}}>Main</span>
+                <span className={this.props.selectedPg===FAVORITES_PG ? "on btn" : "btn"} onClick={()=>{this.props.setPage(FAVORITES_PG)}}>Favorites</span>
             </div>
         )
 
@@ -19,6 +19,7 @@ class Header extends React.Component{
 
 const mapStateToProps = (state)=>{
     return {
+        selectedPg:state.pageManager.pg,
     }
 }
 
