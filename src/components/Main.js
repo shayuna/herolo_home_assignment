@@ -58,13 +58,13 @@ class Main extends React.Component{
     }
     refreshWeatherData(sCityKey,sCityName){
         let jSelectedCity5DayForecast={},jSelectedCityCurrentWeather={};
-        fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/"+sCityKey+"?apikey="+this.state.apiKey)
+        fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/"+sCityKey+"?apikey="+this.state.apiKey)
         .then((sData)=>{
             return sData.json();
         })
         .then((jData)=>{
             jSelectedCity5DayForecast=jData;
-            return fetch("http://dataservice.accuweather.com/currentconditions/v1/"+sCityKey+"?apikey="+this.state.apiKey);
+            return fetch("https://dataservice.accuweather.com/currentconditions/v1/"+sCityKey+"?apikey="+this.state.apiKey);
         })
         .then((sData)=>{
             return sData.json();
@@ -86,7 +86,7 @@ class Main extends React.Component{
     }
     chngSearchBoxContent(e){
         const sInput=e.target.value;
-        fetch("http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey="+this.state.apiKey+"&q="+sInput)
+        fetch("https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey="+this.state.apiKey+"&q="+sInput)
         .then((sLocations)=>{
             return sLocations.json();
         })

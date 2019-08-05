@@ -41,7 +41,7 @@ class Favorites extends React.Component{
             let arCitiesPromises=[];
             arFavs.forEach((oFav,iIndx) => {
                 if (!isNaN(oFav.cityKey) && parseFloat(oFav.cityKey)>0){
-                    arCitiesPromises.push(fetch("http://dataservice.accuweather.com/currentconditions/v1/"+oFav.cityKey+"?apikey="+this.state.apiKey)); 
+                    arCitiesPromises.push(fetch("https://dataservice.accuweather.com/currentconditions/v1/"+oFav.cityKey+"?apikey="+this.state.apiKey)); 
                 }
             });
             Promise.all(arCitiesPromises)
