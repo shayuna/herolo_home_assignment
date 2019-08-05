@@ -63,7 +63,6 @@ class Main extends React.Component{
             return sData.json();
         })
         .then((jData)=>{
-            console.log ("fetch 5 days forecast - "+JSON.stringify(jData));
             jSelectedCity5DayForecast=jData;
             return fetch("http://dataservice.accuweather.com/currentconditions/v1/"+sCityKey+"?apikey="+this.state.apiKey);
         })
@@ -71,7 +70,6 @@ class Main extends React.Component{
             return sData.json();
         })
         .then((jData)=>{
-            console.log ("fetch current weather - "+JSON.stringify(jData));
             jSelectedCityCurrentWeather=jData;
         })
         .catch((err)=>{
@@ -85,16 +83,6 @@ class Main extends React.Component{
                 selectedCityCurrentWeather:jSelectedCityCurrentWeather,
             });
         });
-/*        
-        const sWeather5DaysForecast='{"Headline":{"EffectiveDate":"2019-08-04T07:00:00+09:00","EffectiveEpochDate":1564869600,"Severity":7,"Text":"Humid Sunday to Monday","Category":"humidity","EndDate":"2019-08-05T19:00:00+09:00","EndEpochDate":1564999200,"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/extended-weather-forecast/226396?lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?lang=en-us"},"DailyForecasts":[{"Date":"2019-08-03T07:00:00+09:00","EpochDate":1564783200,"Temperature":{"Minimum":{"Value":78,"Unit":"F","UnitType":18},"Maximum":{"Value":89,"Unit":"F","UnitType":18}},"Day":{"Icon":2,"IconPhrase":"Mostly sunny","HasPrecipitation":false},"Night":{"Icon":34,"IconPhrase":"Mostly clear","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?lang=en-us"},{"Date":"2019-08-04T07:00:00+09:00","EpochDate":1564869600,"Temperature":{"Minimum":{"Value":76,"Unit":"F","UnitType":18},"Maximum":{"Value":92,"Unit":"F","UnitType":18}},"Day":{"Icon":3,"IconPhrase":"Partly sunny","HasPrecipitation":false},"Night":{"Icon":35,"IconPhrase":"Partly cloudy","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=1&lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=1&lang=en-us"},{"Date":"2019-08-05T07:00:00+09:00","EpochDate":1564956000,"Temperature":{"Minimum":{"Value":80,"Unit":"F","UnitType":18},"Maximum":{"Value":89,"Unit":"F","UnitType":18}},"Day":{"Icon":6,"IconPhrase":"Mostly cloudy","HasPrecipitation":false},"Night":{"Icon":35,"IconPhrase":"Partly cloudy","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=2&lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=2&lang=en-us"},{"Date":"2019-08-06T07:00:00+09:00","EpochDate":1565042400,"Temperature":{"Minimum":{"Value":80,"Unit":"F","UnitType":18},"Maximum":{"Value":91,"Unit":"F","UnitType":18}},"Day":{"Icon":4,"IconPhrase":"Intermittent clouds","HasPrecipitation":false},"Night":{"Icon":34,"IconPhrase":"Mostly clear","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=3&lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=3&lang=en-us"},{"Date":"2019-08-07T07:00:00+09:00","EpochDate":1565128800,"Temperature":{"Minimum":{"Value":79,"Unit":"F","UnitType":18},"Maximum":{"Value":89,"Unit":"F","UnitType":18}},"Day":{"Icon":3,"IconPhrase":"Partly sunny","HasPrecipitation":false},"Night":{"Icon":35,"IconPhrase":"Partly cloudy","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=4&lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/daily-weather-forecast/226396?day=4&lang=en-us"}]}';
-        const sCurrentWeather='[{"LocalObservationDateTime":"2019-08-04T04:10:00+09:00","EpochTime":1564859400,"WeatherText":"Mostly clear","WeatherIcon":34,"HasPrecipitation":false,"PrecipitationType":null,"IsDayTime":false,"Temperature":{"Metric":{"Value":25.4,"Unit":"C","UnitType":17},"Imperial":{"Value":78,"Unit":"F","UnitType":18}},"MobileLink":"http://m.accuweather.com/en/jp/tokyo/226396/current-weather/226396?lang=en-us","Link":"http://www.accuweather.com/en/jp/tokyo/226396/current-weather/226396?lang=en-us"}]';
-        this.setState({
-            selectedCityKey:sCityKey,
-            selectedCityName:sCityName,
-            selectedCity5DayForecast:JSON.parse(sWeather5DaysForecast),
-            selectedCityCurrentWeather:JSON.parse(sCurrentWeather),
-        });
-*/        
     }
     chngSearchBoxContent(e){
         const sInput=e.target.value;
@@ -105,7 +93,6 @@ class Main extends React.Component{
         .then((jLocations)=>{
             let arOptions=[];
             jLocations.forEach((jLocation)=>{
-                    console.log(jLocation.LocalizedName+" *** "+jLocation.Key);
                     arOptions.push({label:jLocation.LocalizedName+", "+jLocation.Country.LocalizedName,value:jLocation.Key});
             });
             $( "#eSearchBox" ).autocomplete("option","source",arOptions);
@@ -117,20 +104,7 @@ class Main extends React.Component{
         .catch((err)=>{
             console.log("err in chngSearchBoxContent. err is"+err);
         });
-
-/*
-            const sLocations="[{\"Version\":1,\"Key\":\"226396\",\"Type\":\"City\",\"Rank\":10,\"LocalizedName\":\"Tokyo\",\"Country\":{\"ID\":\"JP\",\"LocalizedName\":\"Japan\"},\"AdministrativeArea\":{\"ID\":\"13\",\"LocalizedName\":\"Tokyo\"}},{\"Version\":1,\"Key\":\"106770\",\"Type\":\"City\",\"Rank\":11,\"LocalizedName\":\"Taiyuan\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"SX\",\"LocalizedName\":\"Shanxi\"}},{\"Version\":1,\"Key\":\"106780\",\"Type\":\"City\",\"Rank\":11,\"LocalizedName\":\"Tianjin\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"TJ\",\"LocalizedName\":\"Tianjin\"}},{\"Version\":1,\"Key\":\"58491\",\"Type\":\"City\",\"Rank\":13,\"LocalizedName\":\"Tongren\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"GZ\",\"LocalizedName\":\"Guizhou\"}},{\"Version\":1,\"Key\":\"102324\",\"Type\":\"City\",\"Rank\":13,\"LocalizedName\":\"Tangshan\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"HE\",\"LocalizedName\":\"Hebei\"}},{\"Version\":1,\"Key\":\"59573\",\"Type\":\"City\",\"Rank\":13,\"LocalizedName\":\"Taizhou\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"JS\",\"LocalizedName\":\"Jiangsu\"}},{\"Version\":1,\"Key\":\"60198\",\"Type\":\"City\",\"Rank\":13,\"LocalizedName\":\"Tongliao\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"NM\",\"LocalizedName\":\"Inner Mongolia\"}},{\"Version\":1,\"Key\":\"106571\",\"Type\":\"City\",\"Rank\":13,\"LocalizedName\":\"Tai'an\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"SD\",\"LocalizedName\":\"Shandong\"}},{\"Version\":1,\"Key\":\"58055\",\"Type\":\"City\",\"Rank\":15,\"LocalizedName\":\"Tianshui\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"GS\",\"LocalizedName\":\"Gansu\"}},{\"Version\":1,\"Key\":\"2333653\",\"Type\":\"City\",\"Rank\":15,\"LocalizedName\":\"Taizhou\",\"Country\":{\"ID\":\"CN\",\"LocalizedName\":\"China\"},\"AdministrativeArea\":{\"ID\":\"ZJ\",\"LocalizedName\":\"Zhejiang\"}}]";
-            const jLocations=JSON.parse(sLocations);
-            let arOptions=[];
-            jLocations.forEach((jLocation)=>{
-                    arOptions.push({label:jLocation.LocalizedName+", "+jLocation.Country.LocalizedName,value:jLocation.Key});
-            });
-            $( "#eSearchBox" ).autocomplete("option","source",arOptions);
-            this.setState({
-                searchBoxInput:sInput,
-            });
-*/
-        }
+    }
     isSelectedCityInFav(){
         let arFav=localStorage.getItem("fav") ? JSON.parse( localStorage.getItem("fav")) : []; 
         return this.state.selectedCityKey!==-1 && arFav.map((oFav)=>oFav.cityKey).includes(this.state.selectedCityKey);
