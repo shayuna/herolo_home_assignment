@@ -12,7 +12,7 @@ class Favorites extends React.Component{
             <div>
                 <Header/>
                 <div id="eFavCitiesWrapper">
-                    {this.state.favCitiesData && this.state.favCitiesData.map((oData,iIndx)=>{
+                    {this.state && this.state.favCitiesData && this.state.favCitiesData.map((oData,iIndx)=>{
                         return (
                             <div className="itm" key={iIndx}>
                                 <div className="caption">{oData.city}</div>
