@@ -1,13 +1,11 @@
 import React from "react";
 import Header from "./Header";
 import {isStrInJson,getFormattedDateAndTimeFromDateStr} from "../helper";
+import {API_KEY} from "../constants";
 
 class Favorites extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            apiKey:"GcZqKb7KlD30uEszhdq98u8g958gwSGq",
-        }
     }
     render(){
         return (
@@ -41,7 +39,7 @@ class Favorites extends React.Component{
             let arCitiesPromises=[];
             arFavs.forEach((oFav,iIndx) => {
                 if (!isNaN(oFav.cityKey) && parseFloat(oFav.cityKey)>0){
-                    arCitiesPromises.push(fetch("https://dataservice.accuweather.com/currentconditions/v1/"+oFav.cityKey+"?apikey="+this.state.apiKey)); 
+                    arCitiesPromises.push(fetch("https://dataservice.accuweather.com/currentconditions/v1/"+oFav.cityKey+"?apikey="+API_KEY)); 
                 }
             });
             Promise.all(arCitiesPromises)

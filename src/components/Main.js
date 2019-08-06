@@ -8,6 +8,7 @@ import $ from 'jquery';
 import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/autocomplete';
 import {getFormattedDateFromDateStr} from "../helper";
+import {API_KEY} from "../constants";
 
 class Main extends React.Component{
     constructor(props){
@@ -19,7 +20,6 @@ class Main extends React.Component{
             selectedCityName:"",
             selectedCity5DayForecast:{},
             selectedCityCurrentWeather:{},
-            apiKey:"GcZqKb7KlD30uEszhdq98u8g958gwSGq",
         }
         this.chngSearchBoxContent=this.chngSearchBoxContent.bind(this);
         this.refreshWeatherData=this.refreshWeatherData.bind(this);
@@ -58,13 +58,13 @@ class Main extends React.Component{
     }
     refreshWeatherData(sCityKey,sCityName){
         let jSelectedCity5DayForecast={},jSelectedCityCurrentWeather={};
-        fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/"+sCityKey+"?apikey="+this.state.apiKey)
+        fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/"+sCityKey+"?apikey="+API_KEY)
         .then((sData)=>{
             return sData.json();
         })
         .then((jData)=>{
             jSelectedCity5DayForecast=jData;
-            return fetch("https://dataservice.accuweather.com/currentconditions/v1/"+sCityKey+"?apikey="+this.state.apiKey);
+            return fetch("https://dataservice.accuweather.com/currentconditions/v1/"+sCityKey+"?apikey="+API_KEY);
         })
         .then((sData)=>{
             return sData.json();
@@ -86,7 +86,7 @@ class Main extends React.Component{
     }
     chngSearchBoxContent(e){
         const sInput=e.target.value;
-        fetch("https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey="+this.state.apiKey+"&q="+sInput)
+        fetch("https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey="+API_KEY+"&q="+sInput)
         .then((sLocations)=>{
             return sLocations.json();
         })
